@@ -8,11 +8,12 @@ class Loki extends Component {
   static defaultProps = {
     backLabel: "Back",
     nextLabel: "Next",
-    finishLabel: "Finish"
+    finishLabel: "Finish",
+    activeStep: 1,
   };
 
   state = {
-    currentStep: 1,
+    currentStep: activeStep || 1,
     stepsDone: [],
     complete: false
   };
@@ -153,7 +154,8 @@ class Loki extends Component {
 
 Loki.propTypes = {
   steps: PropTypes.array.isRequired,
-  onFinish: PropTypes.func.isRequired
+  onFinish: PropTypes.func.isRequired,
+  activeStep: PropTypes.number,
 };
 
 export { Loki as default, LokiStepContainer, LokiStep };

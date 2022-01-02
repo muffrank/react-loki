@@ -366,7 +366,7 @@ var Loki = (_temp2 = _class = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
-      currentStep: activeStep || 1,
+      currentStep: _this.activeStep || 1,
       stepsDone: [],
       complete: false
     }, _temp), _possibleConstructorReturn(_this, _ret);

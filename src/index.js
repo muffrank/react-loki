@@ -13,10 +13,16 @@ class Loki extends Component {
   };
 
   state = {
-    currentStep: this.activeStep || 1,
+    currentStep: this.props.activeStep || 1,
     stepsDone: [],
-    complete: false
+    complete: false,
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeStep !== this.state.currentStep) {
+      this.setState({ ...this.state, currentStep: nextProps.activeStep });
+    }
+  }
 
   _back(data) {
     this.props.onBack && this.props.onBack(data);
@@ -32,7 +38,7 @@ class Loki extends Component {
     this.props.onNext && this.props.onNext(data);
     this.setState({
       currentStep: this.state.currentStep + 1,
-      stepsDone: this.state.stepsDone.concat([this.state.currentStep])
+      stepsDone: this.state.stepsDone.concat([this.state.currentStep]),
     });
   }
 
@@ -43,7 +49,7 @@ class Loki extends Component {
       cantBack: this.state.currentStep === 1,
       isInFinalStep: this.state.currentStep === this.props.steps.length,
       backHandler: this._back.bind(this),
-      nextHandler: this._next.bind(this)
+      nextHandler: this._next.bind(this),
     };
   }
 
@@ -63,7 +69,7 @@ class Loki extends Component {
         currentStep={this.state.currentStep}
         totalSteps={this.props.steps.length}
         step={{ ...step, index: index + 1 }}
-        goTo={newStep => this.setState({ currentStep: newStep })}
+        goTo={(newStep) => this.setState({ currentStep: newStep })}
         isLokiComplete={this.state.complete}
       />
     ));
@@ -80,13 +86,8 @@ class Loki extends Component {
       return this.props.renderComponents(this._lokiData());
     }
 
-    const {
-      stepIndex,
-      cantBack,
-      isInFinalStep,
-      backHandler,
-      nextHandler
-    } = this._lokiData();
+    const { stepIndex, cantBack, isInFinalStep, backHandler, nextHandler } =
+      this._lokiData();
 
     const component = this.props.steps[stepIndex].component;
 
@@ -100,7 +101,7 @@ class Loki extends Component {
         cantBack,
         isInFinalStep,
         onBack: backHandler,
-        onNext: nextHandler
+        onNext: nextHandler,
       });
     }
 

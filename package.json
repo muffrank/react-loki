@@ -31,7 +31,7 @@
     "nwb-sass": "^0.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^2.2.5",
+    "react-icons": "^4.4.0",
     "react-router": "^5.3.0",
     "react-router-dom": "^5.3.0",
     "yup": "^0.22.0"
